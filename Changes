@@ -1,4 +1,8 @@
 Release Notes:
+v1.73 - 2016-04-28
+    Changes
+        @htmlonly block lines have leading ' *<br>'. Added shell script for use
+        in removal as small post-filter for use if unwanted.
 v1.72 - 2015-03-23
     Changes
         Un-did change from 1.71 and fixed it correctly by changing the Doxyfile

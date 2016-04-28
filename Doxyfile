@@ -874,6 +874,14 @@ IMAGE_PATH             =
 # Note that the filter must not add or remove lines; it is applied before the
 # code is scanned, but not when the output code is generated. If lines are added
 # or removed, the anchors will not be placed correctly.
+#
+# If experience leading '* <br>' in @htmlonly blocks, see included 
+# doxygen-filter-perl-htmlonlyfix.sh, example usage:  
+# INPUT_FILTER = /path/doxygen-filter-perl-htmlonlyfix.sh
+# or
+# FILTER_PATTERNS        = *.pm=./doxygen-filter-perl-htmlonlyfix.sh \
+#                          *.pl=./doxygen-filter-perl-htmlonlyfix.sh
+#
 
 INPUT_FILTER           = doxygen-filter-perl
 
