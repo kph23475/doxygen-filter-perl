@@ -1,7 +1,5 @@
 #!/bin/bash
 #
-# 2016-04-28
-#
 # @htmlonly doxygen comment markup introduced by
 # doxygen-filter-perl.
 #
@@ -54,10 +52,13 @@
 #   # &gt;This Sensor</code></div>
 #   #** @endhtmlonly
 #
+#
+# 2016.04.29 - Kevin.Hatfield@gmail.com
+#
 ./bin/doxygen-filter-perl $1                     \
 | /usr/bin/awk       'function removeLineBreak(lineIn)
                       {
-                         gsub(/^[\t* ]{0,}<br>/,"",lineIn);
+			 gsub(/^[\t* ]{0,}(<br>){0,}/,"",lineIn);
                          print lineIn;
                       }
                       BEGIN{ htmltag=0;}
@@ -78,6 +79,19 @@
                       }
                       else
                       {
-                         print $0;
+			 lineout=$0;
+			 if (lineout ~ /<br>/)
+		         {
+			    gsub(/^[ *]<br>|^[ *]<br>|^[ *]{0,}(<br>){1,}/,"<span>",lineout);
+			    gsub(/(<span>){2,}/,"<span>",lineout);
+			    if (lineout !~ /\n[^a-zA-Z0-9.+-_]/ && lineout !~ /<span><\span>|<p><p>/)
+			    {
+			       if (lineout ~ /<span>/){ print lineout"</span>"; }else{ print lineout;}
+		            }
+			 }
+                         else
+		         {
+		            print lineout;
+		         }
                       }
                       }';
